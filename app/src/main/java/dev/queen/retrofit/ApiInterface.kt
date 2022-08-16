@@ -10,4 +10,6 @@ interface ApiInterface {
 
     @GET  ("/posts/{id}")
     fun getPostById(@Path("id") postId: Int): Call<List<Post>>
+
+
 }

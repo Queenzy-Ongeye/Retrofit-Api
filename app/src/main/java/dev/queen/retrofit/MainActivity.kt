@@ -23,12 +23,13 @@ class MainActivity : AppCompatActivity() {
 
     fun getPosts() {
 
-        var service = APIClient.buildApiClient(ApiInterface::class.java)
-        var request = service.getPosts()
+        var apiClient = APIClient.buildApiClient(ApiInterface::class.java)
+        var request = apiClient.getPosts()
 
         request.enqueue(object : Callback<List<Post>> {
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 val post = response.body()!!
+                var comments = response.body()
                 if (response.isSuccessful) {
                     Log.d("TAG", post.toString())
                     var adapter = RetrofitAdapter(baseContext, post)
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Post>>, t: Throwable) {
+
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
 
             }
 
