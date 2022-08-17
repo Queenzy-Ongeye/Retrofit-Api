@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 var comments = response.body()
                 if (response.isSuccessful) {
                     Log.d("TAG", post.toString())
-                    var adapter = RetrofitAdapter(baseContext, post)
+                    var adapter = RetrofitAdapter(post)
                     binding.rcvRetrofit.adapter = adapter
                     binding.rcvRetrofit.layoutManager = LinearLayoutManager(baseContext)
                     Toast.makeText(baseContext, "fetch ${post.size} posts", Toast.LENGTH_LONG)

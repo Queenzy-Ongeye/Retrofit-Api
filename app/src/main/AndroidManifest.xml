@@ -14,8 +14,7 @@
         <activity
             android:name=".ViewComments"
             android:exported="false"
-            android:label="@string/title_activity_view_comments"
-            android:theme="@style/Theme.Retrofit.NoActionBar" />
+            android:label="@string/title_activity_view_comments" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

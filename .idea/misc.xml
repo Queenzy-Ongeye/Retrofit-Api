@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_view_comments.xml" value="0.24110671936758893" />
+        <entry key="app/src/main/res/layout/comment_item_list.xml" value="0.1358695652173913" />
         <entry key="app/src/main/res/layout/retrofit_list_posts.xml" value="0.19375" />
       </map>
     </option>
