@@ -16,7 +16,7 @@ interface ApiInterface {
 
 //    Request for getting a comments of a single post
     @GET  ("/posts/{id}/comments")
-    fun getComments(@Path("id/comment") commentId: Int):Call <Comments>
+    fun getComments(@Path("id") commentId: Int):Call<List<Comments>>
 
 
 }

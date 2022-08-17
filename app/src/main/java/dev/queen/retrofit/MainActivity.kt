@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         request.enqueue(object : Callback<List<Post>> {
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 val post = response.body()!!
-                var comments = response.body()
                 if (response.isSuccessful) {
                     Log.d("TAG", post.toString())
                     var adapter = RetrofitAdapter(post)

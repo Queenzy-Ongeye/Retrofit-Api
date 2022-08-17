@@ -21,11 +21,6 @@ class RetrofitAdapter(
     override fun onBindViewHolder(holder: RetrofitViewHolder, position: Int) {
         var currentItem = postList.get(position)
         val context = holder.itemView.context
-        var progressBar: ProgressBar? = null
-        var i = 0
-        val handler = Handler()
-
-//        var currentComment = commentList[position]
 
         with(holder.bindingView) {
             postId.text = currentItem.id.toString()
@@ -37,28 +32,6 @@ class RetrofitAdapter(
                 var intent = Intent(context, ViewComments::class.java)
                 intent.putExtra("POST_ID", currentItem.id)
                 context.startActivity(intent)
-                if (progressBar != null) {
-                    progressBar.visibility = View.VISIBLE
-                }
-
-                Thread(Runnable {
-                    while (i < 100) {
-                        i+=100
-                        handler.post(Runnable {
-                            if (progressBar != null) {
-                                progressBar.progress = i
-                            }
-                        })
-                        try {
-                            Thread.sleep(100)
-                        }catch (e:InterruptedException){
-                            e.printStackTrace()
-                        }
-                    }
-                    if (progressBar != null) {
-                        progressBar.visibility = View.INVISIBLE
-                    }
-                }).start()
 
 
             }

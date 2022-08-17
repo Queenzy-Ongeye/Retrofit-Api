@@ -1,8 +1,9 @@
 package dev.queen.retrofit
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.ActionBar
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.queen.retrofit.databinding.ActivityViewCommentsBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,32 +16,21 @@ class ViewComments : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         bindingViewComments = ActivityViewCommentsBinding.inflate(layoutInflater)
         setContentView(bindingViewComments.root)
+
         viewComments()
         fetchPost()
+
+        bindingViewComments.tvComments.setOnClickListener {
+            fetchComments()
+        }
+
 
     }
 
 
     fun viewComments() {
-
-//        Renaming the actionbar
-//        val actionBar: ActionBar? = supportActionBar
-//        actionBar!!.setDisplayHomeAsUpEnabled(true)
-//        actionBar.setDisplayShowHomeEnabled(true)
         var extras = intent
         postId = extras.getIntExtra("POST_ID", 0)
-
-
-//        var name = extras.getStringExtra("NAME")
-//        var email = extras.getStringExtra("EMAIL")
-//        var body = extras.getStringExtra("BODY")
-//        actionBar.setTitle(name)
-//
-//        bindingViewComments.tvName.text = name
-//        bindingViewComments.tvEmail.text = email
-//        bindingViewComments.tvBdy.text = body
-//        bindingViewComments.commId.text = id
-
     }
 
     fun fetchPost() {
@@ -53,14 +43,47 @@ class ViewComments : AppCompatActivity() {
                 if (post != null) {
                     bindingViewComments.tvName.text = post.title
                     bindingViewComments.tvBdy.text = post.body
+
                 }
             }
 
             override fun onFailure(call: Call<Post>, t: Throwable) {
+                Toast.makeText(baseContext, t.message, Toast.LENGTH_LONG).show()
 
             }
         })
     }
+
+    fun fetchComments() {
+        var apiClient = APIClient.buildApiClient(ApiInterface::class.java)
+        var request = apiClient.getComments(postId)
+
+        request.enqueue(object : Callback<List<Comments>> {
+            override fun onResponse(
+                call: Call<List<Comments>>,
+                response: Response<List<Comments>>
+            ) {
+                var comments = response.body()
+
+                if (response.isSuccessful){
+                    if (comments != null) {
+                        displayComment(comments)
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Comments>>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+        })
+    }
+
+    fun displayComment(comment: List<Comments>){
+        var adapter = CommentAdapter(comment)
+        bindingViewComments.rcvComment.layoutManager = LinearLayoutManager(this)
+        bindingViewComments.rcvComment.adapter = adapter
+    }
+
 }
 
 
