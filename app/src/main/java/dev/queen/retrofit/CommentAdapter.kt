@@ -17,7 +17,7 @@ class CommentAdapter(var commentList: List<Comments>):RecyclerView.Adapter<Comme
         with(holder.binding){
             tvname.text = currentComment.name
             tvEmail.text = currentComment.email
-            tvBoddy.text = currentComment.commentbody
+            tvBoddy.text = currentComment.body
         }
     }
 

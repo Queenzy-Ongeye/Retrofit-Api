@@ -12,5 +12,5 @@ data class Comments(
     var id: Int,
     var name: String,
     var email: String,
-    var commentbody: String
+    var body: String
 )

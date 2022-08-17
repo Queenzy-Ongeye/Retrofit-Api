@@ -1,6 +1,7 @@
 package dev.queen.retrofit
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,9 +67,8 @@ class ViewComments : AppCompatActivity() {
                 var comments = response.body()
 
                 if (response.isSuccessful){
-                    if (comments != null) {
-                        displayComment(comments)
-                    }
+                    Log.d("TAG", comments.toString())
+                    comments?.let { displayComment(it) }
                 }
             }
 

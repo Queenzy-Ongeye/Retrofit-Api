@@ -4,5 +4,6 @@
         <item>@font/amarante</item>
         <item>@font/amaranth_bold</item>
         <item>@font/amaranth_italic</item>
+        <item>@font/basic</item>
     </array>
 </resources>
